@@ -1,14 +1,25 @@
-Yocto Layer for RealSense
+Yocto meta-layer for RealSense
 ============================
-This layer adds the packages necessary for adding support for Intel® RealSense cameras via [librealsense](https://github.com/IntelRealSense/librealsense) to your Ostro distribution.
-This layer also adds the packages necessary for RealSense [Linux SDK](https://github.com/IntelRealSense/realsense_sdk) and Middlewares to your Ostro distribution.
+This meta-layer adds the packages necessary to support Intel® RealSense RS4XX  depth cameras.The support is provided by means of Intel cross-platform [LibRealSense API](https://github.intel.com/PerCHW/librealsense).
+This layer can later be extended to include RealSense [Linux SDK](https://github.com/IntelRealSense/realsense_sdk) and Middleware to your Yocto-based distribution.
 
+Note for OEM - that LibrealSense library for RS4xx devices is not in publicly available at this time, and accessing it requires ```github.intel.com```.
+Please refer to your Intel POC for details.
 
 ## Dependencies
 This layer depends on packages provided by the following layers:
 * `meta-openembedded` [http://cgit.openembedded.org/meta-openembedded/]
 
+In addition, LibrealSense build recipe is dependent on the following packages:
+* `libusb` and `libpng` - provide LibRealSense core
+* `glfw` - is required for GUI-based demos and tutorials
+
+Note for Yocto maintainers: `glfw`
+
+
+
 Usage
+
 ### Ostro OS
 1. Checkout the `master` branch to your project directory
 2. Add the `meta-intel-realsense` layer to `conf/bblayers.conf` in your `build` directory
@@ -19,6 +30,19 @@ Usage
 ```bitbake
     CORE_IMAGE_EXTRA_INSTALL += "librealsense-graphical-examples"
 ```
+
+### Building a reference Ostro image with this layer embedded:
+1. sdfgsdgfsf
+2. sfdsfsf
+`   abc
+`
+``
+def
+``
+```
+ghi
+```
+
 
 License
 =======
@@ -35,4 +59,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
