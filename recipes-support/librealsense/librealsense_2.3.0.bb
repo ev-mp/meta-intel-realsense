@@ -27,6 +27,8 @@ EXTRA_OECMAKE = " \
 	-DBACKEND=${BACKEND} -DRS_USE_${BACKEND}_BACKEND=true \
 	-DBUILD_EXAMPLES:BOOL=${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'true', 'false', d)} \
 	-DCMAKE_SKIP_RPATH=true \
+	-DCMAKE_BUILD_TYPE=Release \
+	-DCMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS} -std=c++11' \
 "
 
 do_install_append () {
