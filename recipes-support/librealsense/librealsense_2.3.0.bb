@@ -12,7 +12,7 @@ RDEPENDS_${PN}-tests = "librealsense"
 #SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
 #SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
 
-SRC_URI = "git://github.intel.com/PerCHW/librealsense.git;branch=ds5_new;protocol=http"
+SRC_URI = "git://github.intel.com/eraikhel/librealsense.git;branch=ds5_new;protocol=http"
 SRCREV = "${AUTOREV}"
 PR = "r0"
 
@@ -28,7 +28,6 @@ EXTRA_OECMAKE = " \
 	-DBUILD_EXAMPLES:BOOL=${@bb.utils.contains('DISTRO_FEATURES', 'x11 opengl', 'true', 'false', d)} \
 	-DCMAKE_SKIP_RPATH=true \
 	-DCMAKE_BUILD_TYPE=Release \
-	-DCMAKE_CXX_FLAGS='${CMAKE_CXX_FLAGS} -std=c++11' \
 "
 
 do_install_append () {
