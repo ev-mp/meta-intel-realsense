@@ -8,12 +8,19 @@ DEPENDS = "libusb1"
 RDEPENDS_${PN} = "bash"
 RDEPENDS_${PN}-tests = "librealsense"
 
+# Pull LRS by tag
 #SRC_URI = "https://github.com/IntelRealSense/librealsense/archive/v${PV}.tar.gz"
 #SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
 #SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
 
-SRC_URI = "git://github.intel.com/eraikhel/librealsense.git;branch=ds5_new;protocol=http"
-SRCREV = "${AUTOREV}"
+# Pull LRS from trunk
+#SRC_URI = "git://github.intel.com/eraikhel/librealsense.git;branch=ds5_new;protocol=http"
+#SRCREV = "${AUTOREV}"
+
+SRC_URI = "file://librealsense-2.3.2.tar.gz"
+SRC_URI[md5sum] = "4b09c95fa4f8f977a65b6e43430672fb"
+SRC_URI[sha256sum] = "34c6c56d33a99537d4c12f239ce064f8e422907b85ad8941d87364547d180f72"
+
 PR = "r0"
 
 #S = "${WORKDIR}/${PN}-${PV}"
