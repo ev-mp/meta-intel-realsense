@@ -57,7 +57,7 @@ Note for Yocto maintainers: `glfw` is an OpenGl wrapper library that requires a 
 	-	Download customized Ostro-xt layers and recipes, including Intel-meta-layer:
 
 		```
-		$git clone --recursive -b ds5_proto https://github.com/ev-mp/ostro-os-xt-1 ./ostro-build/
+		$git clone --recursive -b lrs_by_tarball https://github.com/ev-mp/ostro-os-xt-1 ./ostro-build/
 		```
 	-	Initialize Ostro build environment:
 
