@@ -3,8 +3,8 @@ Yocto meta-layer for RealSense - RS4xx Devices Prototype
 This meta-layer adds the packages necessary to support Intel® RealSense RS4XX  depth cameras.The support is provided by means of Intel cross-platform [LibRealSense API](https://github.intel.com/PerCHW/librealsense).
 This layer can later be extended to include RealSense [Linux SDK](https://github.com/IntelRealSense/realsense_sdk) and Middleware to your Yocto-based distribution.
 
-Note for OEM -  LibrealSense API for RS4xx devices is not in publicly available at this time, and accessing it requires ```github.intel.com```.
-Please refer to your Intel POC for details.
+Note for OEM -  LibrealSense API for RS4xx devices is not in publicly available at this time.
+Please refer to your Intel POC for details to obtain a tarball source files named `librealsense-2.3.3.tar.gz`.
 
 ## Dependencies
 This layer depends on packages provided by the following layers:
@@ -65,6 +65,9 @@ Note for Yocto maintainers: `glfw` is an OpenGl wrapper library that requires a 
 		$cd ostro-build
 		$source ostro-init-build-env
 		```
+
+	- Create  `downloads` folder at current location (`./ostro-build/build`).
+		Copy LibRealSense sources tarball file `librealsense-2.3.3.tar.gz` received  from Intel POC to this location (`./ostro-build/build/downloads/`).
 
 	-	Choose explicit build configuration and the distribution image formats:
 
