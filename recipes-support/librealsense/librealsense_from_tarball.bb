@@ -13,11 +13,10 @@ RDEPENDS_${PN}-tests = "librealsense"
 #SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
 #SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
 
- Pull LRS by tag
+# Pull LRS by tag
 #SRC_URI = "https://github.com/IntelRealSense/librealsense/archive/v${PV}.tar.gz"
 #SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
 #SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
-
 # Pull LRS from trunk
 #SRC_URI = "git://github.intel.com/eraikhel/librealsense.git;branch=ds5_new;protocol=http"
 #SRCREV = "${AUTOREV}"
