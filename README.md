@@ -29,56 +29,88 @@ Note for Yocto maintainers: `glfw` is an OpenGl wrapper library that requires a 
 ```
 
 ### Reference Ostro image with Intel® RealSense layer embedded:
-1. [Ostro-xt](https://github.com/ostroproject/ostro-os-xt) is a distribution image derived from Yocto that enables X11 and XFCE Desktop and provides support for RealSense devices prior to RS4xx line.
-2. A dedicated ostro-xt branch for this meta-layer validation is publicly available [here](https://github.com/ev-mp/ostro-os-xt-1/tree/ds5_proto)
 
-#### Setup and Build Instructions:
+1.	[Ostro-xt](https://github.com/ostroproject/ostro-os-xt) is a distribution image derived from Yocto that enables X11 and XFCE Desktop and provides support for RealSense devices prior to RS4xx line.
+
+2.	A dedicated ostro-xt branch with meta-intel-layer for RS4xx enablement is publically available [here](https://github.com/ev-mp/ostro-os-xt-1/tree/ds5_proto).
+
+------
+#### Setup and Build Instructions (for Ubuntu 16 LTS Workstation):
 * Prerequisites:
-	-	Make sure the Build machine is up to date:
 	- Ubuntu-based Desktop/Server.
 	- 8+ cores are strongly recommended.
 	- RAM 16Gb. Hard Disk with 60Gb free-space available
 
 
-* Prepare Environment :
+* Environment :
 	-	Make sure the Build machine is up to date:
+
 		```
-		$sudo apt-get update && dist-upgrade
+		$sudo apt-get update && sudo apt-get dist-upgrade
 		```
 	-	Install the Yocto-build required packages:
+
 		```
 		$sudo apt-get install aptitude chrpath gawk git gnome-commander meld texinfo libstdc++6 gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat libsdl1.2-dev xterm
 		```
-
 * Build:
-	-	Download Ostro-xt distribution with Intel-meta-layer:
+	-	Download customized Ostro-xt layers and recipes, including Intel-meta-layer:
+
 		```
 		$git clone --recursive -b ds5_proto https://github.com/ev-mp/ostro-os-xt-1 ./ostro-build/
-		$cd ostro-build
 		```
-	-	Initialize Yocto build environment:
-	```
-	$source ostro-init-build-env
-	```
-	-	Select build image configuration and the required distribution image format
-	```
-	$sed -i '/#require conf\/distro\/include\/ostro-os-development.inc/a require conf/distro/include/ostro-os-development.inc' conf/local.conf
-	$sed -i '/#OSTRO_VM_IMAGE_TYPES =/a OSTRO_VM_IMAGE_TYPES ="dsk.xz dsk.bmap"' conf/local.conf
-	```
-	-	Activate Ostro build
-	```
-	$bitbake ostro-xt-image-swupd
-	```
-------
-Ostro Distribution build process is ~2-4 hours long, depending on the Host hardware spec and internel connection.
+	-	Initialize Ostro build environment:
 
-The resulted image will be located in `ostro-build/build/tmp-glibc/deploy/images/intel-corei7-64` directory.
+		```
+		$cd ostro-build
+		$source ostro-init-build-env
+		```
 
-In order to build cross-compiler toolchain for Off-target software development use the following command:
-```
-$bitbake ostro-xt-image-swupd -c populate_sdk
-```
+	-	Choose explicit build configuration and the distribution image formats:
 
+		```
+		$sed -i '/#require conf\/distro\/include\/ostro-os-development.inc/a require conf/distro/include/ostro-os-development.inc' conf/local.conf
+		$sed -i '/#OSTRO_VM_IMAGE_TYPES =/a OSTRO_VM_IMAGE_TYPES ="dsk.xz dsk.bmap dsk.vdi"' conf/local.conf
+		```
+	-	Run Ostro-xt Image Generation:
+		Tip: there are several build configuration available. For more details inspect the output of the previous step.
+
+		```
+		$bitbake ostro-xt-image-swupd
+		```
+	Be patient, as the Image generation process is ~2-4 hours long, depending on the Host hardware spec and internet connection.
+
+
+* Deployment:
+	- The resulted images are located in the following directory
+
+	```
+	ostro-build/build/tmp-glibc/deploy/images/intel-corei7-64/
+	```
+ - The actual image files that you'd probably need are:
+		-	`ostro-xt-image-swupd-dev-intel-corei7-64-<DATE:TIME>.dsk.xz` – Ostro distribution to be deployed on Ksanka and RVP development boards.
+		-	`ostro-xt-image-swupd-dev-intel-corei7-64-<DATE:TIME>.dsk.vdi` – Virtual Machine image, compatible with Oracle VM VirtualBox.
+
+	- Create bootable USB stick:
+		- Format 4Gb+ USB stick to remote all data and partitions.
+		- Get USB Stick mount name with `$lsblk` command (e.g `/dev/sdc`)
+		- Run -
+	```
+	$xzcat ostro-xt-image-swupd-dev-intel-corei7-64-<DATE:TIME>.dsk.xz | sudo dd of=/dev/sdc bs=512k && sync
+	```
+
+* Developer SDK:
+
+	In order to build cross-compiler SDK for Off-target software development use the following command:
+	```
+	$bitbake ostro-xt-image-swupd -c populate_sdk
+	```
+	The resulted SDK image will be located at:
+	```
+	ostro-build/build/tmp-glibc/deploy/sdk/ostroxt-<architecture>-toolchain-<version>+snapshot.sh
+	```
+
+---
 
 License
 =======
