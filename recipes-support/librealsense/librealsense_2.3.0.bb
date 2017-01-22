@@ -39,8 +39,10 @@ do_install_append () {
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-tests"
 
-FILES_${PN} = "${libdir}/* ${sysconfdir}/udev/rules.d/*"
-FILES_${PN}-dev += "${includedir}/${PN}"
+#FILES_${PN} = "${libdir}/* ${sysconfdir}/udev/rules.d/*"
+#FILES_${PN}-dev += "${includedir}/${PN}"
+FILES_${PN} = "${libdir}/lib*${SOLIBS} ${sysconfdir}/udev/rules.d/*"
+FILES_${PN}-dev += "${libdir}/lib*${SOLIBSDEV} ${includedir}/${PN}"
 
 TMP_FILES_${PN}-examples += "\
 	${bindir}/c-tutorial-1-depth \
