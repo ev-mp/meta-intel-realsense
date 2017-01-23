@@ -44,6 +44,16 @@ PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-tests"
 FILES_${PN} = "${libdir}/lib*${SOLIBS} ${sysconfdir}/udev/rules.d/*"
 FILES_${PN}-dev += "${libdir}/lib*${SOLIBSDEV} ${includedir}/${PN}"
 
+#FILES_${PN}-examples += "\
+#	${bindir}/c-tutorial-1-depth \
+#	${bindir}/cpp-data-collect \
+#	${bindir}/cpp-enumerate-devices \
+#	${bindir}/cpp-fw-logger \
+#	${bindir}/cpp-headless \
+#	${bindir}/cpp-terminal \
+#	${bindir}/cpp-tutorial-1-depth \
+#"
+
 TMP_FILES_${PN}-examples += "\
 	${bindir}/c-tutorial-1-depth \
 	${bindir}/cpp-data-collect \
