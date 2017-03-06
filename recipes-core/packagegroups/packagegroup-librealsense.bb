@@ -1,4 +1,4 @@
-SUMMARY = "librealsense for Ostro XT"
+SUMMARY = "librealsense for Upboard with Yocto"
 LICENSE = "MIT"
 
 inherit packagegroup
