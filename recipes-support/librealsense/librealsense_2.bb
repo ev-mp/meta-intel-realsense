@@ -1,4 +1,4 @@
-SUMMARY = "A cross-platform library for capturing data from the RealSense F200, SR300 and R200 cameras"
+SUMMARY = "A cross-platform library for capturing data from the RealSense RS4XX and SR300 cameras"
 SECTION = "libs"
 
 LICENSE = "Apache-2.0"
