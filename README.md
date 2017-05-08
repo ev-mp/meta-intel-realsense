@@ -40,11 +40,11 @@ A note for Yocto maintainers: `glfw` is an OpenGl wrapper library that requires 
     ├── meta-yocto-bsp
     └── scripts
 ```
-* Download LibRealSense meta-layer
+* Download librealsense meta-layer (local directory)
 ```bitbake
-	git clone -b poky_krogoth https://github.com/ev-mp/meta-intel-realsense.git
+	git clone -b lrs2_proto_poky_krogoth https://github.intel.com/PercHW/meta-intel-realsense.git
 ```
-	* to create the following entry
+	in order to create the following entry
 ```
 .
 └── poky
@@ -69,7 +69,7 @@ CORE_IMAGE_EXTRA_INSTALL += "librealsense librealsense-examples"
 	CORE_IMAGE_EXTRA_INSTALL += "librealsense librealsense-examples librealsense-graphical-examples"
 	```
 
-Proceed to distro build with the original [instruction](https://github.com/emutex/meta-up-board/tree/krogoth)
+Proceed to distro build and deployment  [instructions](https://github.com/emutex/meta-up-board/tree/krogoth)
 
 
 License
