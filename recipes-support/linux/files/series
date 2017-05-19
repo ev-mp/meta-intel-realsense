@@ -1,0 +1,5 @@
+# This series applies on GIT commit be90e260145c0463c7a5c80ced379adc2f4850cc
+01-xhci-Add-helper-to-get-hardware-dequeue-pointer-for.patch
+02-xhci-Add-stream-id-to-to-xhci_dequeue_state-structur.patch
+03-xhci-Find-out-where-an-endpoint-or-stream-stopped-fr.patch
+04-xhci-remove-unused-stopped_td-pointer.patch

@@ -1,0 +1,59 @@
+From a0cdc17d811ee551784062c586b136f0a5fa3026 Mon Sep 17 00:00:00 2001
+From: Mathias Nyman <mathias.nyman@linux.intel.com>
+Date: Wed, 24 May 2017 20:16:16 +0300
+Subject: [PATCH 4/4] xhci: remove unused stopped_td pointer
+
+We no longer keep track of where we stopped in a stopped_td pointer.
+We get the ring dequeue pointer from endpoint or stream context instead
+which is more reliable
+
+Signed-off-by: Mathias Nyman <mathias.nyman@linux.intel.com>
+---
+ drivers/usb/host/xhci-ring.c | 4 ----
+ drivers/usb/host/xhci.h      | 1 -
+ 2 files changed, 5 deletions(-)
+
+diff --git a/drivers/usb/host/xhci-ring.c b/drivers/usb/host/xhci-ring.c
+index 7e3c04b..1d637db 100644
+--- a/drivers/usb/host/xhci-ring.c
++++ b/drivers/usb/host/xhci-ring.c
+@@ -754,7 +754,6 @@ static void xhci_handle_cmd_stop_ep(struct xhci_hcd *xhci, int slot_id,
+ 
+ 	if (list_empty(&ep->cancelled_td_list)) {
+ 		xhci_stop_watchdog_timer_in_irq(xhci, ep);
+-		ep->stopped_td = NULL;
+ 		ring_doorbell_for_active_rings(xhci, slot_id, ep_index);
+ 		return;
+ 	}
+@@ -827,8 +826,6 @@ remove_finished_td:
+ 		ring_doorbell_for_active_rings(xhci, slot_id, ep_index);
+ 	}
+ 
+-	ep->stopped_td = NULL;
+-
+ 	/*
+ 	 * Drop the lock and complete the URBs in the cancelled TD list.
+ 	 * New TDs to be cancelled might be added to the end of the list before
+@@ -1899,7 +1896,6 @@ static int finish_td(struct xhci_hcd *xhci, struct xhci_td *td,
+ 		 * stopped TDs.  A stopped TD may be restarted, so don't update
+ 		 * the ring dequeue pointer or take this TD off any lists yet.
+ 		 */
+-		ep->stopped_td = td;
+ 		return 0;
+ 	}
+ 	if (trb_comp_code == COMP_STALL ||
+diff --git a/drivers/usb/host/xhci.h b/drivers/usb/host/xhci.h
+index 75d1031..f334f9e 100644
+--- a/drivers/usb/host/xhci.h
++++ b/drivers/usb/host/xhci.h
+@@ -922,7 +922,6 @@ struct xhci_virt_ep {
+ #define EP_GETTING_NO_STREAMS	(1 << 5)
+ 	/* ----  Related to URB cancellation ---- */
+ 	struct list_head	cancelled_td_list;
+-	struct xhci_td		*stopped_td;
+ 	unsigned int		stopped_stream;
+ 	/* Watchdog timer for stop endpoint command to cancel URBs */
+ 	struct timer_list	stop_cmd_timer;
+-- 
+2.7.4
+
