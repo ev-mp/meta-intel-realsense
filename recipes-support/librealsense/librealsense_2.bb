@@ -8,15 +8,10 @@ DEPENDS = "libusb1"
 RDEPENDS_${PN} = "bash"
 RDEPENDS_${PN}-tests = "librealsense"
 
-#SRC_URI = "https://github.com/IntelRealSense/librealsense/archive/v${PV}.tar.gz"
-#SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
-#SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
+PV = "2.5.7_PRQ"
+KBRANCH ?= "master"
+SRC_URI = "git://github.intel.com/PerCHW/librealsense.git;branch=${KBRANCH};protocol=http;tag=v${PV}"
 
-SRC_URI = "git://github.intel.com/PerCHW/librealsense.git;branch=ds5_new;protocol=http"
-SRCREV = "${AUTOREV}"
-PR = "r0"
-
-#S = "${WORKDIR}/${PN}-${PV}"
 S = "${WORKDIR}/git"
 
 inherit pkgconfig cmake
