@@ -8,9 +8,18 @@ DEPENDS = "libusb1"
 RDEPENDS_${PN} = "bash"
 RDEPENDS_${PN}-tests = "librealsense"
 
-PV = "2.5.7_PRQ"
+PV = "2.6.2"
 KBRANCH ?= "master"
 SRC_URI = "git://github.intel.com/PerCHW/librealsense.git;branch=${KBRANCH};protocol=http;tag=v${PV}"
+
+#SRC_URI = "https://github.com/IntelRealSense/librealsense/archive/v${PV}.tar.gz"
+#SRC_URI[md5sum] = "27ce627c02731623c23894baeb73b2b1"
+#SRC_URI[sha256sum] = "ee41ecb493b0b5ccf9c413b49529cb880b305188923e343a96b4e1f28982f9e0"
+#S = "${WORKDIR}/${PN}-${PV}"
+
+#SRC_URI = "git://github.intel.com/PerCHW/librealsense.git;branch=ds5_new;protocol=http"
+#SRCREV = "${AUTOREV}"
+#PR = "r0"
 
 S = "${WORKDIR}/git"
 
@@ -34,38 +43,27 @@ do_install_append () {
 
 PACKAGES = "${PN} ${PN}-dbg ${PN}-dev ${PN}-tests"
 
-#FILES_${PN} = "${libdir}/* ${sysconfdir}/udev/rules.d/*"
-#FILES_${PN}-dev += "${includedir}/${PN}"
 FILES_${PN} = "${libdir}/lib*${SOLIBS} ${sysconfdir}/udev/rules.d/*"
 FILES_${PN}-dev += "${libdir}/lib*${SOLIBSDEV} ${includedir}/${PN}"
 
-#FILES_${PN}-examples += "\
-#	${bindir}/c-tutorial-1-depth \
-#	${bindir}/cpp-data-collect \
-#	${bindir}/cpp-enumerate-devices \
-#	${bindir}/cpp-fw-logger \
-#	${bindir}/cpp-headless \
-#	${bindir}/cpp-terminal \
-#	${bindir}/cpp-tutorial-1-depth \
-#"
-
 TMP_FILES_${PN}-examples += "\
 	${bindir}/c-tutorial-1-depth \
-	${bindir}/cpp-data-collect \
-	${bindir}/cpp-enumerate-devices \
-	${bindir}/cpp-fw-logger \
-	${bindir}/cpp-headless \
-	${bindir}/cpp-terminal \
 	${bindir}/cpp-tutorial-1-depth \
+	${bindir}/rs-data-collect \
+	${bindir}/rs-enumerate-devices \
+	${bindir}/rs-fw-logger \
+	${bindir}/rs-headless \
+	${bindir}/rs-terminal \
 "
 
 TMP_FILES_${PN}-graphical-examples += "\
 	${bindir}/c-tutorial-2-streams \
-	${bindir}/cpp-capture \
-	${bindir}/cpp-config-ui \
-	${bindir}/cpp-multicam \
-	${bindir}/cpp-pointcloud \
 	${bindir}/cpp-tutorial-2-streams \
+	${bindir}/rs-capture \
+	${bindir}/rs-config-ui \
+	${bindir}/rs-multicam \
+	${bindir}/rs-pointcloud \
+	${bindir}/rs400-advanced-mode-sample \
 "
 
 FILES_${PN}-tests += "\
